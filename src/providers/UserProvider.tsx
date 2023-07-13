@@ -23,7 +23,7 @@ export default function UserProvider({children}: {children: ReactNode}){
   return (
     <UserContext.Provider value={{
       user,
-      updateUser(newData: User) {
+      updateUser(newData?: User) {
         setUser(newData)
       }
     }}>
