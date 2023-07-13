@@ -1,0 +1,47 @@
+.header{
+  top: 0;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  position: sticky;
+  transition: top 0.4s, padding 0.4s, background-color 0.4s, border-radius 0.8s;
+  justify-content: space-between;
+
+  &.active{
+    top: 16px;
+    padding: 10px 20px;
+    border-radius: 14px;
+    background-color: var(--accent-bg);
+  }
+}
+
+.title{
+  color: var(--text);
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.user{
+  cursor: pointer;
+  display: flex;
+  overflow: hidden;
+  transition: border 0.4s;
+  border-radius: 50%;
+}
+
+.user:hover{
+  border-color: var(--accent);
+}
+
+.user-default{
+  font-size: 47px;
+}
+
+@media (width <= 800px) {
+  .routes{
+    display: none;
+  }
+}

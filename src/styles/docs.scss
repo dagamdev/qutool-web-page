@@ -1,0 +1,11 @@
+.doc{
+  margin: 0 auto;
+  
+  &-section{
+    margin: 40px 0;
+
+    & p{
+      white-space: pre-line;
+    }
+  }
+}
