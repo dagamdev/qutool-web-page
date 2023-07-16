@@ -12,6 +12,18 @@ export async function customDiscordFetch(path: string, token: string) {
   }).then(prom=> prom.json())
 }
 
+export async function customFetch(path: string, method?: string, body?: object) {
+  return fetch('api/'+path, {
+    method,
+    headers: body ? {
+      'Content-Type': 'application/json',
+    } : undefined,
+    body: body ? JSON.stringify({
+      body
+    }) : undefined
+  }).then(prom=> prom.json())
+}
+
 export const transformText = (text: string) => {
   text = text.replace(/> /g, ``)
 
