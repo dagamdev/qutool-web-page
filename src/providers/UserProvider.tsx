@@ -1,8 +1,8 @@
-import { useState, useEffect, ReactNode } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
 import { UserContext } from "@/contexts";
 import type { User } from '@/utils/types';
 import { useSession } from '@/hooks';
-import { customDiscordFetch } from '@/utils/services';
+import { customFetch } from '@/utils/services';
 
 export default function UserProvider({children}: {children: ReactNode}){
   const [user, setUser] = useState<User>()
@@ -10,13 +10,11 @@ export default function UserProvider({children}: {children: ReactNode}){
 
   useEffect(()=> {
     if(session){
-      customDiscordFetch('users/@me', session.accessToken)
-      .then(res=> {
-        // console.log(res)
+      customFetch('user').then(res=> {
         if(res.id){
           setUser(res)
         }
-      }).catch(e=> console.error(e))
+      }).catch(e=> console.error('Error: ', e))
     }
   }, [session])
   

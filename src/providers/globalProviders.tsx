@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import SessionProvider from './SessionProvider'
 import UserProvider from './UserProvider'
 import TooltipsProvider from './TooltipsProvider'
