@@ -19,8 +19,8 @@ passport.deserializeUser(async (id: string, done) => {
 
 passport.use(new DiscordStrategy({
   clientID: '935707268090056734',
-  clientSecret: 'zyoD-QJ3jxUnHLAChqNxUcqIypzpNexq',
-  callbackURL: 'http://localhost:3000/api/auth/redirect',
+  clientSecret: process.env.SECRET || '',
+  callbackURL: process.env.CALLBACK_URL || 'http://localhost:3000/api/auth/redirect',
   scope: ['identify', 'email', 'guilds.join']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
@@ -44,6 +44,6 @@ passport.use(new DiscordStrategy({
   }
 }))
 
-export default (req: NextRequest, res: NextResponse) => {
+export default function auth(req: NextRequest, res: NextResponse) {
   passport.authenticate('discord')(req, res)
 }

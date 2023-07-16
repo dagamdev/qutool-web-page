@@ -58,10 +58,10 @@ export default function Navigator(){
       name: 'Log out',
       function() {
         if(documentExist){          
-          customFetch('logout').then(res=> {
-            if(res.ok && PROTECTED_ROUTES.some(s=> s == pathName)) {
+          customFetch('auth/logout').then(res=> {
+            if(res.ok) {
               updateUser()
-              router.push('/')
+              if(PROTECTED_ROUTES.some(s=> s == pathName)) router.push('/')
             }
           }).catch(e=> {
             console.error(e)

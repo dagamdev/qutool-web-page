@@ -1,5 +1,5 @@
-import { withSessionRoute } from "@/lib/withSession";
-import { NextApiRequest, NextApiResponse } from "next";
+import { withSessionRoute } from "@/lib";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default withSessionRoute((req: NextApiRequest, res: NextApiResponse) => {
   const { user } = req.session

@@ -36,9 +36,9 @@ export default function Home() {
 
   return (
     <main className={styles.home}>
-      <h2>{textLanguage[navigatorLanguage].title || textLanguage.en.title}</h2>
+      <h2>{textLanguage.en.title}</h2>
       {botDescription && <p dangerouslySetInnerHTML={{__html: transformText(botDescription[navigatorLanguage] || botDescription.en)}}></p>}
-      <button onClick={handleClick}>{textLanguage[navigatorLanguage].logIn || textLanguage.en.logIn}</button>
+      <button onClick={handleClick}>{textLanguage.en.logIn}</button>
     </main>
   )
 }

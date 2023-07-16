@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { getMessage } from "@/lib";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function PrivacyPilicies(req: NextApiRequest, res: NextApiResponse) {
   try {
     const PPEs = await getMessage('1017921717261312040', '1127790049048666172')
     const PPEn = await getMessage('1017921717261312040', '1127791687234756669')

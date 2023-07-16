@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { getMessage } from "@/lib";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function TermsOfUse(req: NextApiRequest, res: NextApiResponse) {
   try {
     const TOSEs = await getMessage('1017921717261312040', '1127792290858012813')
     const TOSEn = await getMessage('1017921717261312040', '1127792344238919680')
