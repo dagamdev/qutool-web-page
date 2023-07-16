@@ -4,10 +4,10 @@ import { type MouseEvent } from 'react'
 import Link from "next/link"
 import { useTooltips, useUser } from '@/hooks'
 import { useRouter, usePathname } from 'next/navigation'
-import { documentExist, windowExist } from '@/utils/services'
+import { customFetch, documentExist, windowExist } from '@/utils/services'
 import type { TooltipOption } from '@/utils/types'
 import { FaRegUser } from 'react-icons/fa'
-import { END_POINT, PROTECTED_ROUTES } from '@/utils/config'
+import { PROTECTED_ROUTES } from '@/utils/config'
 import { RxDashboard } from 'react-icons/rx'
 import { BiUserCircle } from 'react-icons/bi'
 import { IoMdExit, IoMdLogIn } from 'react-icons/io'
@@ -39,13 +39,13 @@ export default function Navigator(){
   const { events, createTooltip } = useTooltips()
 
   const options: TooltipOption[] = user ? [
-    {
-      icon: <FaRegUser />,
-      name: 'Profile',
-      function() {
-        console.log('asd')
-      },
-    },
+    // {
+    //   icon: <FaRegUser />,
+    //   name: 'Profile',
+    //   function() {
+    //     console.log('asd')
+    //   },
+    // },
     {
       icon: <RxDashboard />,
       name: 'Dashboard',
@@ -58,8 +58,14 @@ export default function Navigator(){
       name: 'Log out',
       function() {
         if(documentExist){          
-          updateUser()
-          if(windowExist) window.location.href = END_POINT+'logout'
+          customFetch('logout').then(res=> {
+            if(res.ok && PROTECTED_ROUTES.some(s=> s == pathName)) {
+              updateUser()
+              router.push('/')
+            }
+          }).catch(e=> {
+            console.error(e)
+          })
         }
       },
     }
@@ -68,16 +74,12 @@ export default function Navigator(){
       icon: <IoMdLogIn />,
       name: 'Log in',
       function() {
-        fetch(END_POINT+'auth/redirect').then(prom=> prom.json())
-        .then(res=> console.log(res))
-        .catch(e=> console.error(e))
-        // if(windowExist) window.location.href = END_POINT+'auth'
+        if(windowExist) window.location.href = 'api/auth'
       },
     }
   ]
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
-    console.log('click')
     createTooltip(e, {options})
   }
 

@@ -2,8 +2,7 @@
 
 import '@/styles/docs.scss'
 import { useEffect, useState } from 'react'
-import { navigatorLanguage, transformText } from '@/utils/services'
-import { END_POINT } from "@/utils/config"
+import { customFetch, navigatorLanguage, transformText } from '@/utils/services'
 
 export default function TermsPage(){
   const [terms, setTerms] = useState<{
@@ -12,14 +11,13 @@ export default function TermsPage(){
   }>()
 
   useEffect(()=> {
-    fetch(END_POINT+'TOS').then(prom=> prom.json())
+    customFetch('bot/TOS')
     .then(res=> {
       if(res.en) setTerms(res)
     })
     .catch(e=> console.error('Error in get terms', e))
   }, [])  
   
-  console.log(navigatorLanguage)
 
   return (
     <main className='doc'>

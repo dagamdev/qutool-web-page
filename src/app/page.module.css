@@ -5,3 +5,11 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.home h2{
+  margin: 20px;
+}
+
+.home button{
+  margin: 20px;
+}

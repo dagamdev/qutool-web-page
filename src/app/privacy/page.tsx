@@ -1,5 +1,6 @@
 'use client'
 
+import '@/styles/docs.scss'
 import { useState, useEffect } from 'react'
 import { customFetch, navigatorLanguage, transformText } from '@/utils/services'
 
