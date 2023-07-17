@@ -1,34 +1,25 @@
-'use client'
-
 import '@/styles/docs.scss'
-import { useState, useEffect } from 'react'
-import { customFetch, navigatorLanguage, transformText } from '@/utils/services'
 
-export default function PrivacyPage(){
-  const [terms, setTerms] = useState<{
-    'es': string
-    'en': string
-  }>()
+import { transformText } from '@/utils/services'
+import { getSSRLanguage, getSSRTextByLang, controllers } from '@/lib'
+import docs from '@/utils/documents.json'
 
-  useEffect(()=> {
-    customFetch('bot/PP')
-    .then(res=> {
-      if(res.en) setTerms(res)
-    })
-    .catch(e=> console.error('Error in get terms', e))
-  }, [])  
-  
+
+export default async function PrivacyPage(){
+  const lang = getSSRLanguage()
+  const text = getSSRTextByLang()
+  const privacyPolicies = await controllers.getTextsLang('PP')  
 
   return (
     <main className='doc'>
-      {terms && <section id='bot' className='doc-section'>
-        <h2>Políticas de privacidad del bot Bot</h2>
-        <p dangerouslySetInnerHTML={{__html: transformText(terms[navigatorLanguage] || terms.en)}}></p>
-      </section>}
+      <section id='bot' className='doc-section'>
+        <h2>{text.bot.PP}</h2>
+        <p dangerouslySetInnerHTML={{__html: transformText(privacyPolicies[lang])}}></p>
+      </section>
 
       <section id='web' className='doc-section'>
         <h2>Políticas de privacidad del la Página</h2>
-        <p>Working...</p>
+        <p dangerouslySetInnerHTML={{__html: transformText(docs[lang].PP)}} />
       </section>
     </main>
   )

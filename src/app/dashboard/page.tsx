@@ -1,13 +1,18 @@
 'use client'
 
-import { Metadata } from "next"
+import { useLanguage } from "@/hooks"
 import { useEffect } from "react"
 
 export default function DashboardPage(){
+  const { textLang } = useLanguage()
+
   useEffect(()=> {
   }, [])
 
   return (
-    <h2>Dashboard</h2>
+    <main>
+      <h2>{textLang.dashboard}</h2>
+
+    </main>
   )
 }
