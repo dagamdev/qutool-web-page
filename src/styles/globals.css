@@ -113,9 +113,10 @@ button, .button{
   cursor: pointer;
   padding: 0.6rem 1rem;
   font-size: 16px;
-  transition: 0.3s;
+  transition: filter 0.3s;
   font-weight: 500;
   border-radius: 6px;
+  text-decoration: none;
   background-color: var(--accent);
 
   &:hover{
