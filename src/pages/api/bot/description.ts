@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getMessage } from "@/lib";
+import { getTextsLang } from "@/lib/controllers";
 
 export default async function botDescription(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const descriptionEs = await getMessage('1017921717261312040', '1129955027902013462')
-    const descriptionEn = await getMessage('1017921717261312040', '1129955066082762832')
+    const description = await getTextsLang('description')
 
-    if(!descriptionEs.content && descriptionEn.content) return res.status(400).json({message: 'Content not found'})
+    if(description) return res.status(400).json({message: 'Content not found'})
     
-    res.json({en: descriptionEn.content, es: descriptionEs.content})
+    res.json(description)
 
   } catch (error: any) {
     res.status(400).json({message: error?.message})
