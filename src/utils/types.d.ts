@@ -43,3 +43,10 @@ export interface Tooltip {
   }
   targetElement?: EventTarget & HTMLElement
 }
+
+export type Languages = 'en' | 'es'
+
+export interface LanguageData {
+  en: string
+  es: string
+} 
