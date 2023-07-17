@@ -2,41 +2,34 @@ import styles from './header.module.scss'
 
 import { type MouseEvent } from 'react'
 import Link from "next/link"
-import { useTooltips, useUser } from '@/hooks'
+import { useTooltips, useUser, useLanguage, useDialog } from '@/hooks'
 import { useRouter, usePathname } from 'next/navigation'
-import { customFetch, documentExist, windowExist } from '@/utils/services'
+import { customFetch, documentExist } from '@/utils/services'
 import type { TooltipOption } from '@/utils/types'
-import { FaRegUser } from 'react-icons/fa'
 import { PROTECTED_ROUTES } from '@/utils/config'
 import { RxDashboard } from 'react-icons/rx'
 import { BiUserCircle } from 'react-icons/bi'
 import { IoMdExit, IoMdLogIn } from 'react-icons/io'
 
-const ROUTES = [
-  {
-    path: '/',
-    name: 'Inicio'
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard'
-  },
-  // {
-  //   path: '/terms',
-  //   name: 'Términos de uso'
-  // },
-  // {
-  //   path: '/privacy',
-  //   name: 'Políticas de privacidad'
-  // },
-] as const
 
 export default function Navigator(){
   const pathName = usePathname()
   const router = useRouter()
+  const { textLang } = useLanguage()
   const { user, updateUser } = useUser()
-  // const user: any = undefined
   const { events, createTooltip } = useTooltips()
+  const { openDialog } = useDialog()
+
+  const ROUTES = [
+    {
+      path: '/',
+      name: textLang.home
+    },
+    {
+      path: '/dashboard',
+      name: textLang.dashboard
+    }
+  ] as const
 
   const options: TooltipOption[] = user ? [
     // {
@@ -48,14 +41,14 @@ export default function Navigator(){
     // },
     {
       icon: <RxDashboard />,
-      name: 'Dashboard',
+      name: textLang.dashboard,
       function() {
         
       },
     },
     {
       icon: <IoMdExit />,
-      name: 'Log out',
+      name: textLang.logOut,
       function() {
         if(documentExist){          
           customFetch('auth/logout').then(res=> {
@@ -72,9 +65,9 @@ export default function Navigator(){
   ] : [
     {
       icon: <IoMdLogIn />,
-      name: 'Log in',
+      name: textLang.logIn,
       function() {
-        if(windowExist) window.location.href = 'api/auth'
+        openDialog()
       },
     }
   ]

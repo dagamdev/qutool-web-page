@@ -6,15 +6,16 @@ import { useEffect, useRef } from 'react'
 import Navigator from "./Navigator";
 import { useRouter } from 'next/navigation'
 import { documentExist, windowExist } from '@/utils/services';
-import { useTooltips } from '@/hooks';
+import { useTooltips, useLanguage } from '@/hooks';
 import { IoMdPersonAdd } from 'react-icons/io'
 import { MdOutlinePrivacyTip, MdOutlineAutoStories } from 'react-icons/md'
 import { QUTOOL_INVITE_URL } from '@/utils/config';
 
 export default function Header(){
+  const router = useRouter()
+  const { textLang } = useLanguage()
   const headerRef = useRef<HTMLElement>(null)
   const { tooltips, createTooltip, deleteTooltip } = useTooltips()
-  const router = useRouter()
 
   useEffect(()=> {
     if(documentExist && windowExist){
@@ -31,21 +32,21 @@ export default function Header(){
           },
           options: [
             {
-              name: 'Invite your server',
+              name: textLang.invite,
               icon: <IoMdPersonAdd />,
               function() {
                 if(windowExist) window.open(QUTOOL_INVITE_URL, '_blank')
               }
             },
             {
-              name: 'Terms of use',
+              name: textLang.TOS,
               icon: <MdOutlineAutoStories />,
               function() {
                 router.push('/terms')
               },
             },
             {
-              name: 'Privacy policies',
+              name: textLang.PP,
               icon: <MdOutlinePrivacyTip />,
               function() {
                 router.push('/privacy')
