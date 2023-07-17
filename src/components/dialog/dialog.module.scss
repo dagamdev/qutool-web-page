@@ -1,0 +1,42 @@
+.dialog{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 40;
+  display: grid;
+  position: fixed;
+  place-items: center;
+  backdrop-filter: blur(2px) brightness(50%);
+  
+  &-card{
+    width: min(400px, 100%);
+    padding: 20px;
+    box-shadow: var(--tooltip-shadow);
+    border-radius: 14px;
+    background-color: var(--accent-bg);
+
+    & p{
+      text-align: center;
+      white-space: pre-wrap;
+    }
+  }
+
+  &-buttons{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    margin-top: 30px;
+
+    & button:first-child{
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      background-color: transparent;
+    }
+
+    & button:last-child{
+      color: var(--text);
+      background-color: #0c8a29;
+    }
+  }
+}
