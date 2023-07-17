@@ -1,22 +1,19 @@
 import { useState, useEffect, type ReactNode } from 'react'
-import { UserContext } from "@/contexts";
 import type { User } from '@/utils/types';
-import { useSession } from '@/hooks';
+import { UserContext } from "@/contexts";
 import { customFetch } from '@/utils/services';
 
 export default function UserProvider({children}: {children: ReactNode}){
   const [user, setUser] = useState<User>()
-  const { session } = useSession()
 
   useEffect(()=> {
-    if(session){
-      customFetch('user').then(res=> {
-        if(res.id){
-          setUser(res)
-        }
-      }).catch(e=> console.error('Error: ', e))
-    }
-  }, [session])
+    customFetch('user').then(res=> {
+      if(res.id){
+        setUser(res)
+      }
+    }).catch(e=> console.error('Error: ', e))
+    
+  }, [])
   
   return (
     <UserContext.Provider value={{
