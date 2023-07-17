@@ -1,5 +1,5 @@
 import { DISCORD_END_POINT } from "./config"
-import type { ElementDirection } from "./types"
+import type { ElementDirection, Languages } from "./types"
 
 export const documentExist = typeof document != 'undefined'
 export const windowExist = typeof window != 'undefined'
@@ -137,4 +137,6 @@ export function setFixedAbsolutePosition(element: HTMLElement, position: {
   else element.style.top = y+'px'  
 }
 
-export const navigatorLanguage = typeof navigator != 'undefined' ? navigator.language.split('-')[0] as 'en' | 'es' : 'en'
+export function getCSRLanguage(): Languages {
+  return navigator.language.split('-')[0] as (Languages | undefined) || 'en'
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getLanguage } from '@/utils/services'
+import { getCSRLanguage } from '@/utils/services'
 import texts from '@/utils/texts.json'
 import type { Languages } from '@/utils/types'
 
@@ -11,7 +11,7 @@ export function useLanguage() {
   const textLang = texts[lang]
 
   useEffect(()=> {
-    const language = getLanguage()
+    const language = getCSRLanguage()
     if(AVAILABLES_LANGS.some(s=> s == language)) {
       setLang(language)
     } 
