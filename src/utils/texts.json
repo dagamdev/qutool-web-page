@@ -8,9 +8,11 @@
     "invite": "Invite your server",
     "TOS": "Terms of use",
     "PP": "Privacy policies",
+    "members": "members",
     "bot": {
       "TOS": "Bot Terms of Use",
-      "PP": "Bot Privacy Policies"
+      "PP": "Bot Privacy Policies",
+      "add": "Add bot"
     },
     "dialogs": {
       "consent": "Hello"
@@ -25,9 +27,11 @@
     "invite": "Invitar a tu servidor",
     "TOS": "Términos de uso",
     "PP": "Políticas de privacidad",
+    "members": "miembros",
     "bot": {
       "TOS": "Términos de Uso del Bot",
-      "PP": "Políticas de privacidad del bot Bot"
+      "PP": "Políticas de privacidad del bot Bot",
+      "add": "Añadir bot"
     },
     "dialogs": {
       "consent": "Al iniciar secion aceptas las politicas de privacidad de la pagina"
