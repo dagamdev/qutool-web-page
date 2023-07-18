@@ -124,6 +124,11 @@ button, .button{
   }
 }
 
+button.success, .button.success{
+  color: var(--text);
+  background-color: #0c8a29;
+}
+
 blockquote {
   margin: 2rem;
   padding: 0.4rem 0.8rem;
