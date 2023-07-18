@@ -9,3 +9,7 @@
 .home h2{
   margin: 20px;
 }
+
+.home p{
+  white-space: pre-wrap;
+}
