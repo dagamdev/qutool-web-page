@@ -10,6 +10,7 @@ import { PROTECTED_ROUTES } from '@/utils/config'
 import { RxDashboard } from 'react-icons/rx'
 import { BiUserCircle } from 'react-icons/bi'
 import { IoMdExit, IoMdLogIn } from 'react-icons/io'
+import DiscordImage from '@/components/image/DiscordImage'
 
 
 export default function Navigator(){
@@ -85,7 +86,7 @@ export default function Navigator(){
       </ul>
 
       <div onClick={handleClick} className={styles.user} style={{border: user?.avatar ? '2px solid var(--border)' : ''}} data-direction='bottom'>
-        {user?.avatar ? <img src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.includes('a_') ? 'gif' : 'png'}`} alt={(user.global_name || 'user')+' avatar'} width={40} height={40} /> : <BiUserCircle className={styles['user-default']} />}
+        {user?.avatar ? <DiscordImage id={user.id} image={user.avatar} type='user avatar' alt={user.username} /> : <BiUserCircle className={styles['user-default']} />}
       </div>
     </nav>
   )
