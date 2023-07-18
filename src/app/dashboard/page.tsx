@@ -1,18 +1,17 @@
-'use client'
+import styles from './dashboard.module.scss'
+import Guilds from './components/Guilds'
+import { getSSRTextByLang } from '@/lib'
 
-import { useLanguage } from "@/hooks"
-import { useEffect } from "react"
 
-export default function DashboardPage(){
-  const { textLang } = useLanguage()
+export default async function DashboardPage(){
+  const text = getSSRTextByLang()
 
-  useEffect(()=> {
-  }, [])
 
   return (
-    <main>
-      <h2>{textLang.dashboard}</h2>
+    <main className={styles.dashboard}>
+      <h2>{text.dashboard}</h2>
 
+      <Guilds />
     </main>
   )
 }
