@@ -24,6 +24,17 @@ export interface User {
   avatar_decoration: string | null
 }
 
+export interface Guild {
+  id: string
+  name: string
+  icon: string | null
+  owner: boolean
+  permissions: string
+  features: string[]
+  approximate_member_count?: number
+  approximate_presence_count?: number
+}
+
 export type ElementDirection = 'top' | 'left' | 'bottom' | 'right'
 
 export interface TooltipOption {
@@ -49,4 +60,4 @@ export type Languages = 'en' | 'es'
 export interface LanguageData {
   en: string
   es: string
-} 
+}
