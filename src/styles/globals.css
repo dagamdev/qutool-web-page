@@ -114,7 +114,8 @@ button, .button{
   padding: 0.6rem 1rem;
   font-size: 16px;
   transition: filter 0.3s;
-  font-weight: 500;
+  text-align: center;
+  font-weight: bold;
   border-radius: 6px;
   text-decoration: none;
   background-color: var(--accent);
@@ -127,6 +128,10 @@ button, .button{
 button.success, .button.success{
   color: var(--text);
   background-color: #0c8a29;
+}
+button.invert, .button.invert{
+  color: var(--accent);
+  background-color: var(--bg);
 }
 
 blockquote {
