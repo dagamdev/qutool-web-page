@@ -21,7 +21,7 @@ export default withSessionRoute(async (req, res) =>{
       }
 
       await req.session.save()
-      res.redirect(domainPath+'/dashboard')
+      res.redirect(domainPath+'/servers')
     }
   })(req, res)
 })
