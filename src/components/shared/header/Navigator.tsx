@@ -12,7 +12,6 @@ import { BiUserCircle } from 'react-icons/bi'
 import { IoMdExit, IoMdLogIn } from 'react-icons/io'
 import DiscordImage from '@/components/image/DiscordImage'
 
-
 export default function Navigator(){
   const pathName = usePathname()
   const router = useRouter()
@@ -27,22 +26,15 @@ export default function Navigator(){
       name: textLang.home
     },
     {
-      path: '/dashboard',
-      name: textLang.dashboard
+      path: '/servers',
+      name: textLang.servers
     }
   ] as const
 
   const options: TooltipOption[] = user ? [
-    // {
-    //   icon: <FaRegUser />,
-    //   name: 'Profile',
-    //   function() {
-    //     console.log('asd')
-    //   },
-    // },
     {
       icon: <RxDashboard />,
-      name: textLang.dashboard,
+      name: textLang.servers,
       function() {
         
       },
