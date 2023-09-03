@@ -1,5 +1,6 @@
 {
   "en": {
+    "ok": "Ok",
     "home": "Home",
     "title": "Qutool Discord bot",
     "logIn": "Log in",
@@ -11,6 +12,7 @@
     "TOS": "Terms of use",
     "PP": "Privacy policies",
     "members": "members",
+    "inDisagreement": "In disagreement",
     "bot": {
       "TOS": "Bot Terms of Use",
       "PP": "Bot Privacy Policies",
@@ -21,6 +23,7 @@
     }
   },
   "es": {
+    "ok": "De acuerdo",
     "home": "Inicio",
     "title": "Qutool bot de Discord",
     "logIn": "Iniciar sesión",
@@ -32,6 +35,7 @@
     "TOS": "Términos de uso",
     "PP": "Políticas de privacidad",
     "members": "miembros",
+    "inDisagreement": "En desacuerdo",
     "bot": {
       "TOS": "Términos de Uso del Bot",
       "PP": "Políticas de privacidad del bot Bot",
