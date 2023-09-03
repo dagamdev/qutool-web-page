@@ -1,16 +1,24 @@
 'use client'
 
 import styles from '../servers.module.scss'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type MouseEvent } from 'react'
 import { customFetch, getCSRLanguage } from '@/utils/services'
 import GuildCard from './GuildCard'
 import type { Guild } from '@/utils/types'
+import { useDialog } from '@/hooks'
 
 export default function Guilds(){
   const [guilds, setGuilds] = useState<Guild[]>([])
   const isEnglish = getCSRLanguage() == 'en'
+  const { openDialog } = useDialog()
 
-  const login = <a href="api/auth">{isEnglish ? 'register' : 'regístrate'}</a>
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+
+    openDialog()
+  }
+
+  const login = <a onClick={handleClick} href={isEnglish ? 'log in' : 'regístrarse'}>{isEnglish ? 'register' : 'regístrate'}</a>
 
   useEffect(()=> {
     customFetch('user/guilds?with_counts=true').then(res=> {

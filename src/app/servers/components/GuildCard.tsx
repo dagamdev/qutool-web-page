@@ -36,7 +36,7 @@ export default function GuildCard({guild}: {guild: Guild}){
       </header>
 
       {inGuild ? 
-        <a className='button' href='/'>{textLang.manageServer}</a> :
+        <a className='button' href={'/dashboard/'+guild.id}>{textLang.manageServer}</a> :
         <a className='button invert' href={`https://discord.com/oauth2/authorize?client_id=935707268090056734&scope=bot&permissions=1374725470454&guild_id=${guild.id}&response_type=code&redirect_uri=http://localhost:3000/dashboard`} >{textLang.bot.add}</a>
       }
 
