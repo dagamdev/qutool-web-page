@@ -138,5 +138,5 @@ export function setFixedAbsolutePosition(element: HTMLElement, position: {
 }
 
 export function getCSRLanguage(): Languages {
-  return navigator.language.split('-')[0] as (Languages | undefined) || 'en'
+  return typeof navigator == 'undefined' ? 'en' : navigator.language.split('-')[0] as (Languages | undefined) || 'en'
 }
