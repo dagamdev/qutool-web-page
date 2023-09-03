@@ -3,13 +3,12 @@
 import styles from './button.module.scss'
 import Link from 'next/link'
 import { useLanguage, useDialog, useUser } from '@/hooks'
-import { getCSRLanguage } from '@/utils/services'
 
 export default function LogInButton(){
-  const { textLang } = useLanguage()
+  const { textLang, lang } = useLanguage()
   const { user } = useUser()
   const { openDialog } = useDialog()
-  const isEnglish = getCSRLanguage() == 'en'
+  const isEnglish = lang == 'en'
 
   const handleClick = () => {
     openDialog()
