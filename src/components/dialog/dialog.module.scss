@@ -6,15 +6,27 @@
   z-index: 40;
   display: grid;
   position: fixed;
+  animation: Bg_show 0.5s ease forwards;
   place-items: center;
-  backdrop-filter: blur(2px) brightness(50%);
+  
+  &.hide{
+    backdrop-filter: none;
+    animation: Bg_show 0.5s ease forwards, Bg_hide 0.4s ease forwards;
+  }
   
   &-card{
     width: min(400px, 100%);
     padding: 20px;
+    opacity: 0;
+    transform: scale(0.8);
     box-shadow: var(--tooltip-shadow);
     border-radius: 14px;
     background-color: var(--accent-bg);
+    animation: Card_show 0.5s ease forwards;
+    
+    .hide &{
+      animation: Card_show 0.5s ease forwards, Card_hide 0.4s ease forwards;
+    }
 
     & p{
       text-align: center;
@@ -38,5 +50,40 @@
       color: var(--text);
       background-color: #0c8a29;
     }
+  }
+}
+
+@keyframes Bg_show {
+  to {
+    backdrop-filter: blur(2px) brightness(50%);
+  }
+}
+
+@keyframes Bg_hide {
+  to {
+    backdrop-filter: none;
+  }
+}
+
+
+@keyframes Card_show {
+  40% {
+    opacity: 1;
+    transform: scale(1.1)
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes Card_hide {
+  to {
+    opacity: 0;
+    transform: scale(0.8)
   }
 }
