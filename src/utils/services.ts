@@ -7,7 +7,7 @@ export const windowExist = typeof window != 'undefined'
 export async function customDiscordFetch(path: string, token: string) {
   return fetch(DISCORD_END_POINT+path, {
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `${token}`
     }
   }).then(prom=> prom.json())
 }

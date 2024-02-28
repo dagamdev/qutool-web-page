@@ -11,6 +11,7 @@ import { DISCORD_END_POINT } from '@/utils/config'
 export const  controllers = { getTextsLang } 
 
 export async function getClient(req: NextApiRequest): Promise<Session | null> {
+  console.log(req.session.user)
   return await ClientModel.findOne({userId: req.session.user?.id})
 }
 
