@@ -1,5 +1,4 @@
 import '@/styles/globals.css'
-// import 'simpledotcss/simple.min.css'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import GlobalProviders from '@/providers/globalProviders'
