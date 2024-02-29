@@ -7,14 +7,12 @@ import DialogProvider from './DialogProvider'
 
 export default function GlobalProviders({children}: {children: ReactNode}) {
   return (
-    <>
-      <UserProvider>
-        <TooltipsProvider>
-          <DialogProvider>
-            {children}
-          </DialogProvider>
-        </TooltipsProvider>
-      </UserProvider>
-    </>
+    <UserProvider>
+      <TooltipsProvider>
+        <DialogProvider>
+          {children}
+        </DialogProvider>
+      </TooltipsProvider>
+    </UserProvider>
   )
 }
