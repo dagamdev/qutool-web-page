@@ -5,7 +5,6 @@ import texts from '@/utils/texts.json'
 import type { Languages, Session } from '@/utils/types'
 
 export { isAuthenticate } from './middlewares'
-export { withSessionRoute, withSessionSsr } from './withSession'
 import { getTextsLang } from './controllers'
 import { DISCORD_END_POINT } from '@/utils/config'
 export const  controllers = { getTextsLang } 
