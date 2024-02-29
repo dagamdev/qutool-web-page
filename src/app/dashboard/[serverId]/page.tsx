@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '../dashboard.module.scss'
+import styles from '../dashboard.module.css'
 import { useLanguage } from '@/hooks'
 
 export default function DashboardPage({params: {serverId}}: {params: {serverId: string}}){

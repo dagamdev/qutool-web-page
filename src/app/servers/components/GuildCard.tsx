@@ -1,4 +1,4 @@
-import styles from '../servers.module.scss'
+import styles from '../servers.module.css'
 
 import { useState, useEffect } from 'react'
 import DiscordImage from "@/components/image/DiscordImage"

@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '../servers.module.scss'
+import styles from '../servers.module.css'
 import { useState, useEffect, type MouseEvent } from 'react'
 import { customFetch, getCSRLanguage } from '@/utils/services'
 import GuildCard from './GuildCard'

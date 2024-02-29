@@ -1,4 +1,4 @@
-import '@/styles/docs.scss'
+import '@/styles/docs.css'
 
 import { transformText } from '@/utils/services'
 import { getSSRLanguage, getSSRTextByLang, controllers } from '@/lib'

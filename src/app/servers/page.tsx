@@ -1,4 +1,4 @@
-import styles from './servers.module.scss'
+import styles from './servers.module.css'
 import Guilds from './components/Guilds'
 import { getSSRTextByLang } from '@/lib'
 
