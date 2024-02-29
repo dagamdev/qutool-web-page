@@ -1,6 +1,6 @@
 import { useContext, type MouseEvent } from 'react'
 import { TooltipsContext, type TooltipsContextData } from "@/contexts"
-import type { ElementDirection, TooltipOption } from '@/utils/types'
+import type { ElementDirection, TooltipOption } from '@/types'
 
 export function useTooltips() {
   const tooltipsContext = useContext(TooltipsContext) as TooltipsContextData

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getCSRLanguage } from '@/utils/services'
 import texts from '@/utils/texts.json'
-import type { Languages } from '@/utils/types'
+import type { Languages } from '@/types'
 
 const AVAILABLES_LANGS: readonly Languages[] = ['en', 'es']
 
