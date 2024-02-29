@@ -28,8 +28,8 @@ export default function ConsenNotice(){
     }
   }
 
-  const signIn = () => {
-    if(windowExist) window.location.href = 'api/auth'
+  const handleSignIn = () => {
+    location.assign('https://discord.com/oauth2/authorize?client_id=935707268090056734&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback&scope=identify+guilds+guilds.join+email')
     setClose(true)
   }
 
@@ -49,7 +49,7 @@ export default function ConsenNotice(){
 
         <div className={styles['dialog-buttons']}>
           <button onClick={closeDialog}>{textLang.inDisagreement}</button>
-          <button onClick={signIn}>{textLang.ok}</button>  
+          <button onClick={handleSignIn}>{textLang.ok}</button>  
         </div>
       </div>
     </div>
