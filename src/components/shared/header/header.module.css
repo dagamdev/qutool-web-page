@@ -1,4 +1,4 @@
-.header{
+.header {
   top: 0;
   width: min(1200px, 100%);
   margin: 0 auto;
@@ -8,7 +8,7 @@
   transition: top 0.4s, padding 0.4s, background-color 0.4s, border-radius 0.8s;
   justify-content: space-between;
 
-  &.active{
+  &.active {
     top: 16px;
     padding: 10px 20px;
     border-radius: 14px;
@@ -16,7 +16,7 @@
   }
 }
 
-.title{
+.title {
   color: var(--text);
   display: flex;
   column-gap: 10px;
@@ -24,7 +24,7 @@
   text-decoration: none;
 }
 
-.user{
+.user {
   cursor: pointer;
   display: flex;
   overflow: hidden;
@@ -32,16 +32,16 @@
   border-radius: 50%;
 }
 
-.user:hover{
+.user:hover {
   border-color: var(--accent);
 }
 
-.user-default{
+.user-default {
   font-size: 47px;
 }
 
 @media (width <= 800px) {
-  .routes{
+  .routes {
     display: none;
   }
 }

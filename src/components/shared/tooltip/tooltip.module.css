@@ -1,4 +1,4 @@
-.background{
+.background {
   top: 0;
   width: 100%;
   height: 100vh;
@@ -7,13 +7,13 @@
   position: fixed;
   animation: Show_Background 0.5s ease forwards, Hide_Background 0.5s ease forwards;
   
-  &.show{
+  &.show {
     animation: Show_Background 0.5s ease forwards;
   }
 }
 
 
-.tooltip{
+.tooltip {
   z-index: 500;
   padding: 4px 8px;
   position: fixed;
@@ -22,12 +22,8 @@
   pointer-events: none;
   background-color: var(--accent-bg);
   /* background-color: var(--accent); */
-
-  & p{
-    font-weight: 600;
-  }
   
-  &.options{
+  &.options {
     width: 100%;
     bottom: 0;
     display: flex;
@@ -44,77 +40,13 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
-  
-  .show &{
-    animation: Show_Panel 0.6s ease forwards;
-  }
-  
-  &-option{
-    cursor: pointer;
-    // display: flex;
-    position: relative;
-    // background-color: var(--accent-bg);
-    
-    & > div{
-      display: flex;
-      padding: 10px 20px;
-      align-items: center;
-      border-radius: 6px;
-      background-color: var(--bg);
-
-      & > *:first-child{
-        margin-right: 16px;
-      }
-      
-      & > *:last-child{
-        font-weight: bold;
-      }
-    }
-  
-    &::before{
-      left: 0;
-      width: 100%;
-      height: 1px;
-      bottom: -3px;
-      content: '';
-      position: absolute;
-      background-color: var(--accent);
-    }
-
-    &:last-child::before{
-      display: none;
-    }
-    
-    &-icon{
-      display: flex;
-      font-size: 20px;
-    }
-  }
-
-  &-arrow{
-    display: none;
-    position: absolute;
-    border-color: var(--bg);
-  
-    .top &{
-      bottom: -13px;
-      border: 7px solid transparent;
-      border-top: 8px solid var(--accent-bg);
-    }
-    
-    .bottom &{
-      top: -13px;
-      border: 7px solid transparent;
-      border-bottom: 8px solid var(--accent-bg);
-    }
-  }
 
   @media (min-width: 500px) {
     opacity: 0;
     transform: scale(0.98);
     transition: transform 0.4s, opacity 0.3s;
     
-    &.options{
+    &.options {
       width: auto;
       bottom: auto;
       padding: 0;
@@ -124,37 +56,108 @@
       border-radius: 6px;
     }
 
-    &.show{
+    &.show {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
   
-    &-option{
-      padding: 6px;
-      /* background-color: transparent; */
-
-      &:hover > div{
-        background-color: var(--bg);
-      }
-    
-      & > div{
-        padding: 4px 6px;
-        transition: background-color 0.3s;
-        justify-content: space-between;
-        background-color: transparent;
-      }
-    }
-  
-    /* &-option:hover{
+    /* &-option:hover {
       filter: brightness(1.4);
     } */
-  
-    &-arrow{
-      display: block;
-      position: absolute;
-    }
   }
 }
+
+.tooltip p {
+  font-weight: 600;
+}
+
+.show .tooltip  {
+  animation: Show_Panel 0.6s ease forwards;
+}
+
+.tooltip-option {
+  cursor: pointer;
+  /* display: flex; */
+  position: relative;
+  /* background-color: var(--accent-bg); */
+}
+
+.tooltip-option::before {
+  left: 0;
+  width: 100%;
+  height: 1px;
+  bottom: -3px;
+  content: '';
+  position: absolute;
+  background-color: var(--accent);
+}
+
+.tooltip-option:last-child::before {
+  display: none;
+}
+
+.tooltip-option-icon {
+  display: flex;
+  font-size: 20px;
+}
+
+.tooltip-option-arrow {
+  display: none;
+  position: absolute;
+  border-color: var(--bg);
+}
+
+.tooltip > div {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--bg);
+}
+
+.tooltip > div > *:first-child {
+  margin-right: 16px;
+}
+
+.tooltip > div > *:last-child {
+  font-weight: bold;
+}
+
+.top .tooltip-option-arrow {
+  bottom: -13px;
+  border: 7px solid transparent;
+  border-top: 8px solid var(--accent-bg);
+}
+  
+.bottom .tooltip-option-arrow {
+  top: -13px;
+  border: 7px solid transparent;
+  border-bottom: 8px solid var(--accent-bg);
+}
+
+@media (min-width: 500px) {
+  .tooltip-option {
+    padding: 6px;
+    /* background-color: transparent; */
+  }
+  
+  .tooltip-option:hover > div {
+    background-color: var(--bg);
+  }
+
+  .tooltip-option > div {
+    padding: 4px 6px;
+    transition: background-color 0.3s;
+    justify-content: space-between;
+    background-color: transparent;
+  }
+
+  .tooltip-arrow {
+    display: block;
+    position: absolute;
+  }
+}
+
 
 @keyframes Show_Background {
   100%{

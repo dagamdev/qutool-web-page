@@ -1,4 +1,4 @@
-import styles from './header.module.scss'
+import styles from './header.module.css'
 
 import Link from "next/link";
 import Image from "next/image";
@@ -7,8 +7,8 @@ import Navigator from "./Navigator";
 import { useRouter } from 'next/navigation'
 import { documentExist, windowExist } from '@/utils/services';
 import { useTooltips, useLanguage } from '@/hooks';
-import { IoMdPersonAdd } from 'react-icons/io'
-import { MdOutlinePrivacyTip, MdOutlineAutoStories } from 'react-icons/md'
+// import { IoMdPersonAdd } from 'react-icons/io'
+// import { MdOutlinePrivacyTip, MdOutlineAutoStories } from 'react-icons/md'
 import { QUTOOL_INVITE_URL } from '@/utils/config';
 
 export default function Header(){
@@ -33,21 +33,24 @@ export default function Header(){
           options: [
             {
               name: textLang.invite,
-              icon: <IoMdPersonAdd />,
+              // icon: <IoMdPersonAdd />,
+              icon: '-',
               function() {
                 if(windowExist) window.open(QUTOOL_INVITE_URL, '_blank')
               }
             },
             {
               name: textLang.TOS,
-              icon: <MdOutlineAutoStories />,
+              // icon: <MdOutlineAutoStories />,
+              icon: '-',
               function() {
                 router.push('/terms')
               },
             },
             {
               name: textLang.PP,
-              icon: <MdOutlinePrivacyTip />,
+              // icon: <MdOutlinePrivacyTip />,
+              icon: '-',
               function() {
                 router.push('/privacy')
               },

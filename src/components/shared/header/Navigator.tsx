@@ -1,4 +1,4 @@
-import styles from './header.module.scss'
+import styles from './header.module.css'
 
 import { type MouseEvent } from 'react'
 import Link from "next/link"
@@ -7,9 +7,9 @@ import { useRouter, usePathname } from 'next/navigation'
 import { customFetch, documentExist } from '@/utils/services'
 import type { TooltipOption } from '@/utils/types'
 import { PROTECTED_ROUTES } from '@/utils/config'
-import { RxDashboard } from 'react-icons/rx'
-import { BiUserCircle } from 'react-icons/bi'
-import { IoMdExit, IoMdLogIn } from 'react-icons/io'
+// import { RxDashboard } from 'react-icons/rx'
+// import { BiUserCircle } from 'react-icons/bi'
+// import { IoMdExit, IoMdLogIn } from 'react-icons/io'
 import DiscordImage from '@/components/image/DiscordImage'
 
 export default function Navigator(){
@@ -33,14 +33,16 @@ export default function Navigator(){
 
   const options: TooltipOption[] = user ? [
     {
-      icon: <RxDashboard />,
+      // icon: <RxDashboard />,
+      icon: '-',
       name: textLang.servers,
       function() {
         
       },
     },
     {
-      icon: <IoMdExit />,
+      // icon: <IoMdExit />,
+      icon: '-',
       name: textLang.logOut,
       function() {
         if(documentExist){          
@@ -57,7 +59,8 @@ export default function Navigator(){
     }
   ] : [
     {
-      icon: <IoMdLogIn />,
+      // icon: <IoMdLogIn />,
+      icon: '-',
       name: textLang.logIn,
       function() {
         openDialog()
@@ -78,7 +81,11 @@ export default function Navigator(){
       </ul>
 
       <div onClick={handleClick} className={styles.user} style={{border: user?.avatar ? '2px solid var(--border)' : ''}} data-direction='bottom'>
-        {user?.avatar ? <DiscordImage id={user.id} image={user.avatar} type='user avatar' alt={user.username} /> : <BiUserCircle className={styles['user-default']} />}
+        {user?.avatar
+          ? <DiscordImage id={user.id} image={user.avatar} type='user avatar' alt={user.username} />
+          : 'hola'
+          // <BiUserCircle className={styles['user-default']} />
+        }
       </div>
     </nav>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './dialog.module.scss'
+import styles from './dialog.module.css'
 import Link from 'next/link'
 import { useRef, useState, useEffect, type MouseEvent, type AnimationEvent } from 'react'
 import { useDialog, useLanguage } from "@/hooks"

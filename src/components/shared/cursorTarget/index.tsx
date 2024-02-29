@@ -1,4 +1,4 @@
-import styles from './cursorTarget.module.scss'
+import styles from './cursorTarget.module.css'
 
 import { useEffect, useState } from 'react'
 import { documentExist } from '@/utils/services'

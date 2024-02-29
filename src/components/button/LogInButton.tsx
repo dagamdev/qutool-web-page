@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './button.module.scss'
+import styles from './button.module.css'
 import Link from 'next/link'
 import { useLanguage, useDialog, useUser } from '@/hooks'
 

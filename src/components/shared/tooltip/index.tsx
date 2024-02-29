@@ -1,4 +1,4 @@
-import styles from './tooltip.module.scss'
+import styles from './tooltip.module.css'
 
 import { useRef, useState, useEffect } from 'react'
 import { useTooltips } from '@/hooks'
