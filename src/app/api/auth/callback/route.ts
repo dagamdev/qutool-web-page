@@ -1,4 +1,7 @@
-import { redirect } from "next/navigation"
+import { SessionModel } from '@/models'
+import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
+import type { Oauth2Data } from '@/types'
 
 export async function GET (req: Request) {
   const url = new URL(req.url)
@@ -15,10 +18,10 @@ export async function GET (req: Request) {
       'client_secret': process.env.CLIENT_SECRET as string,
       'grant_type': 'authorization_code',
       code,
-      'redirect_uri': 'http://localhost:3000/api/auth/callback'
+      'redirect_uri': url.origin + url.pathname
     })
     
-    const authRes = await fetch('https://discord.com/api/oauth2/token', {
+    const authRes = await fetch('https://discord.com/api/v10/oauth2/token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -26,14 +29,20 @@ export async function GET (req: Request) {
       body
     })
 
-    console.log(authRes)
-
     if (authRes.status !== 200) {
       throw new Error('Failed response | status code != 200')
     }
 
-    const authData = await authRes.json()
-    console.log(authData)
+    const authData: Oauth2Data = await authRes.json()
+
+    const newSession = await SessionModel.create({
+      accessToken: authData.access_token,
+      refreshToken: authData.refresh_token
+    })
+
+    const cookieStore = cookies()
+    cookieStore.set('sessionId', newSession.id)
+
   } catch (error) {
     console.log('Error in callback: ', error)
   }
