@@ -1,0 +1,15 @@
+.doc {
+  margin: 0 auto;
+}
+  
+.doc-section {
+  margin: 40px 0;
+}
+
+.doc-section h2 {
+  margin: 10px 0;
+}
+
+.doc-section p {
+  white-space: pre-line;
+}
