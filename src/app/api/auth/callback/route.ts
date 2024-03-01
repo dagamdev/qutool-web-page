@@ -2,6 +2,7 @@ import { SessionModel } from '@/models'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import type { Oauth2Data } from '@/types'
+import { getSession } from '@/lib'
 
 export async function GET (req: Request) {
   const url = new URL(req.url)
@@ -34,14 +35,23 @@ export async function GET (req: Request) {
     }
 
     const authData: Oauth2Data = await authRes.json()
-
-    const newSession = await SessionModel.create({
-      accessToken: authData.access_token,
-      refreshToken: authData.refresh_token
-    })
-
     const cookieStore = cookies()
-    cookieStore.set('sessionId', newSession.id)
+    const session = await getSession()
+    
+    if (session) {
+      session.accessToken = authData.access_token
+      session.refreshToken = authData.refresh_token
+
+      await session.save()
+      cookieStore.set('sessionId', session.id)
+    } else {
+      const newSession = await SessionModel.create({
+        accessToken: authData.access_token,
+        refreshToken: authData.refresh_token
+      })
+
+      cookieStore.set('sessionId', newSession.id)
+    }
 
   } catch (error) {
     console.log('Error in callback: ', error)
