@@ -2,7 +2,7 @@ import { SessionModel } from '@/models'
 import { cookies } from 'next/headers'
 import { headers } from 'next/headers'
 import texts from '@/utils/texts.json'
-import type { Languages } from '@/types'
+import type { Languages, User } from '@/types'
 import { getTextsLang } from './controllers'
 import { DISCORD_END_POINT } from '@/utils/config'
 export const  controllers = { getTextsLang } 
@@ -32,8 +32,12 @@ export function getSSRTextByLang() {
   return texts[getSSRLanguage()]
 }
 
-export async function discordFetch (path: string, init?: RequestInit) {
-  const response = await fetch('https://discord.com/api/v10/' + path, init)
+export async function discordFetch (path: string, token?: string) {
+  const response = await fetch('https://discord.com/api/v10/' + path, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
   const contentType = response.headers.get('content-type')
 
   if (contentType !== 'application/json') {
@@ -51,4 +55,13 @@ export async function customBotFetch(path: string) {
       'Authorization': `Bot ${process.env.BOT_TOKEN}`
     }
   }).then(prom=> prom.json())
+}
+
+export async function getUser (): Promise<User | null> {
+  const session = await getSession()
+  const user = await discordFetch('users/@me', session?.accessToken)
+
+  if ('username' in user) return user
+
+  return null
 }

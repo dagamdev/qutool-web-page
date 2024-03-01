@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import GlobalProviders from '@/providers/globalProviders'
 import SharedComponents from '@/components/shared'
-import { discordFetch, getSession } from '@/lib'
+import { discordFetch, getSession, getUser } from '@/lib'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,11 +21,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await getSession()
-  const user = await discordFetch('users/@me', {
-    headers: {
-      'Authorization': `Bearer ${session?.accessToken}`
-    }
-  })
+  const user = await getUser()
 
   return (
     <html lang="en">
@@ -33,7 +29,7 @@ export default async function RootLayout({
         <GlobalProviders session={session ? {
           accessToken: session.accessToken,
           refreshToken: session.refreshToken
-        } : undefined} user={'id' in user ? user : undefined}>
+        } : undefined} user={user ?? undefined}>
           <SharedComponents />
           {children}
         </GlobalProviders>
