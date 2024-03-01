@@ -4,10 +4,10 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
 
-  & h2 {
-    margin-bottom: 40px;
-  }
+.servers h2 {
+  margin-bottom: 40px;
 }
 
 .guilds {
@@ -17,37 +17,34 @@
   justify-content: center;
 }
 
-.guilds_card {
+.card {
   gap: 20px;
   display: flex;
   padding: 20px;
+  min-width: 260px;
+  max-width: 360px;
   box-shadow: var(--tooltip-shadow);
   border-radius: 14px;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   background-color: var(--accent-bg);
 }
 
-.guilds_card header {
+.card header {
   display: flex;
   column-gap: 20px;
-  align-items: center;
 }
 
-.guilds_card header p {
+.card header img {
+  border-radius: 50%;
+}
+
+.card header p {
   margin: 6px 0;
 }
 
-.guilds_card a {
+.card a {
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
-  
-.guilds_card-icon {
-  width: 60px;
-  height: 60px;
-  overflow: hidden;
-  border-radius: 50%;
-  background-color: var(--bg);
-} 

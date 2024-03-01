@@ -1,14 +1,15 @@
 'use client'
 
 import styles from '../servers.module.css'
-import { useState, useEffect, type MouseEvent } from 'react'
-import { customFetch, getCSRLanguage } from '@/utils/services'
+import { type MouseEvent } from 'react'
+import { getCSRLanguage } from '@/utils/services'
 import GuildCard from './GuildCard'
-import type { Guild } from '@/utils/types'
+import type { Guild } from '@/types'
 import { useDialog } from '@/hooks'
 
-export default function Guilds(){
-  const [guilds, setGuilds] = useState<Guild[]>([])
+export default function Guilds ({ guilds }: {
+  guilds: Guild[]
+}) {
   const isEnglish = getCSRLanguage() == 'en'
   const { openDialog } = useDialog()
 
@@ -19,15 +20,6 @@ export default function Guilds(){
   }
 
   const login = <a onClick={handleClick} href={isEnglish ? 'log in' : 'regístrarse'}>{isEnglish ? 'register' : 'regístrate'}</a>
-
-  useEffect(()=> {
-    customFetch('user/guilds?with_counts=true').then(res=> {
-      console.log(res)
-      if(res.length){
-        setGuilds(res.filter((g: Guild)=> g.owner || (parseInt(g.permissions) & 0x8) == 0x8))
-      }
-    }).catch(e=> console.error(e))
-  }, [])
 
   return guilds.length ? (
     <ul className={styles.guilds}>

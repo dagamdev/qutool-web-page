@@ -4,11 +4,13 @@ export const metadata: Metadata = {
   title: 'Servers'
 }
 
-export default function ServersLayout({
-  children,
+export default async function ServersLayout({
+  children
 }: {
   children: React.ReactNode
 }) {
+  console.log('Servers layout')
+
   return (
     <>
       {children}

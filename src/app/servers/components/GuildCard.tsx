@@ -2,11 +2,11 @@ import styles from '../servers.module.css'
 
 import { useState, useEffect } from 'react'
 import DiscordImage from "@/components/image/DiscordImage"
-import type { Guild } from "@/utils/types"
+import type { Guild } from "@/types"
 import { customFetch } from '@/utils/services'
 import { useLanguage } from '@/hooks'
 
-export default function GuildCard({guild}: {guild: Guild}){
+export default function GuildCard ({ guild }: { guild: Guild }){
   const { textLang } = useLanguage()
   const [inGuild, setInGuild] = useState(false)
 
@@ -17,13 +17,13 @@ export default function GuildCard({guild}: {guild: Guild}){
   }, [])
 
   return (
-    <ul className={styles['guilds_card']}>
+    <ul className={styles.card}>
       <header>
-        <div className={styles['guilds_card-icon']}>
+        <picture>
           {guild.icon && 
             <DiscordImage type={'guild icon'} id={guild.id} image={guild.icon} alt={guild.name} width={60} height={60} /> 
           }
-        </div>
+        </picture>
 
         <div>
           <strong>{guild.name}</strong>
