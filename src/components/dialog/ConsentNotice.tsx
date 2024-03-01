@@ -29,7 +29,7 @@ export default function ConsenNotice(){
   }
 
   const handleSignIn = () => {
-    location.assign('https://discord.com/oauth2/authorize?client_id=935707268090056734&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback&scope=identify+guilds+guilds.join+email')
+    location.assign(`https://discord.com/oauth2/authorize?client_id=935707268090056734&response_type=code&redirect_uri=${encodeURIComponent(location.origin + '/api/auth/callback')}&scope=identify+guilds+guilds.join`)
     setClose(true)
   }
 
