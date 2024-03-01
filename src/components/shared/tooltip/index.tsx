@@ -3,7 +3,7 @@ import styles from './tooltip.module.css'
 import { useRef, useState, useEffect } from 'react'
 import { useTooltips } from '@/hooks'
 import { documentExist, setFixedAbsolutePosition, setPositionByTarget, windowExist } from '@/utils/services'
-import { Tooltip } from '@/utils/types'
+import { Tooltip } from '@/types'
 
 export default function Tooltip({tooltip}: {
   tooltip: Tooltip
@@ -74,20 +74,18 @@ export default function Tooltip({tooltip}: {
   }, [deleteId, thisRef])
 
   const tooltipElement = tooltip && (
-    <div ref={setThisRef} className={`${styles.tooltip} ${tooltip.options ? styles.options : ''} ${styles[tooltip.direction || 'top']} tlp`} >
-      {tooltip.targetElement && <div className={styles['tooltip-arrow']} />}
+    <div ref={setThisRef} className={`${styles.root} ${tooltip.options ? styles.options : ''} ${styles[tooltip.direction || 'top']} tlp`} >
+      {tooltip.targetElement && <div className={styles.arrow} />}
       {tooltip.options ?
-        tooltip.options.map(o=> <li key={o.name} className={styles['tooltip-option']} onClick={()=> {
+        tooltip.options.map(o=> <li key={o.name} className={styles.option} onClick={()=> {
           o.function()
           closeTooltip()
         }} >
-          <div>
-            {typeof o.icon == 'string' ? 
-              <p>{o.icon}</p> :
-              <div className={styles['tooltip-option-icon']}>{o.icon}</div>
-            }
-            <p>{o.name}</p> 
-          </div>
+          {typeof o.icon == 'string' ? 
+            <p>{o.icon}</p> :
+            <div className={styles['tooltip-option-icon']}>{o.icon}</div>
+          }
+          <p>{o.name}</p> 
         </li>) :
         <p>{tooltip.content}</p>
       }

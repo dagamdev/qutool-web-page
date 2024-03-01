@@ -13,9 +13,9 @@
 }
 
 
-.tooltip {
+.root {
   z-index: 500;
-  padding: 4px 8px;
+  padding: 4px 10px;
   position: fixed;
   box-shadow: var(--tooltip-shadow);
   border-radius: 6px;
@@ -27,10 +27,8 @@
     width: 100%;
     bottom: 0;
     display: flex;
-    row-gap: 5px;
-    /* padding: 20px; */
+    row-gap: 6px;
     padding: 20px 0 0 0;
-    position: fixed;
     transform: translateY(110%);
     animation: Show_Panel 0.6s ease forwards, Hide_Panel 0.6s ease forwards;
     list-style: none;
@@ -41,7 +39,7 @@
     border-top-right-radius: 10px;
   }
 
-  @media (min-width: 500px) {
+  @media (width > 500px) {
     opacity: 0;
     transform: scale(0.98);
     transition: transform 0.4s, opacity 0.3s;
@@ -49,8 +47,9 @@
     &.options {
       width: auto;
       bottom: auto;
-      padding: 0;
+      padding: 6px;
       position: absolute;
+      row-gap: 13px;
       animation: none;
       transform: translateY(0) scale(0.96);
       border-radius: 6px;
@@ -67,32 +66,32 @@
   }
 }
 
-.tooltip p {
+.root p {
   font-weight: 600;
 }
 
-.show .tooltip  {
+.show .root  {
   animation: Show_Panel 0.6s ease forwards;
 }
 
-.tooltip-option {
+.option {
   cursor: pointer;
   /* display: flex; */
   position: relative;
   /* background-color: var(--accent-bg); */
 }
 
-.tooltip-option::before {
+.option::before {
   left: 0;
   width: 100%;
   height: 1px;
-  bottom: -3px;
+  bottom: -7px;
   content: '';
   position: absolute;
   background-color: var(--accent);
 }
 
-.tooltip-option:last-child::before {
+.option:last-child::before {
   display: none;
 }
 
@@ -101,7 +100,7 @@
   font-size: 20px;
 }
 
-.tooltip-option-arrow {
+.arrow {
   display: none;
   position: absolute;
   border-color: var(--bg);
@@ -123,36 +122,35 @@
   font-weight: bold;
 }
 
-.top .tooltip-option-arrow {
+.top .arrow {
   bottom: -13px;
   border: 7px solid transparent;
   border-top: 8px solid var(--accent-bg);
 }
   
-.bottom .tooltip-option-arrow {
+.bottom .arrow {
   top: -13px;
   border: 7px solid transparent;
   border-bottom: 8px solid var(--accent-bg);
 }
 
-@media (min-width: 500px) {
-  .tooltip-option {
-    padding: 6px;
-    /* background-color: transparent; */
+@media (width > 500px) {  
+  .option {
+    display: flex;
+    padding: 8px 12px;
+    column-gap: 6px;
+    transition: background-color 0.3s;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border-radius: 6px;
   }
   
-  .tooltip-option:hover > div {
+  .option:hover {
     background-color: var(--bg);
   }
 
-  .tooltip-option > div {
-    padding: 4px 6px;
-    transition: background-color 0.3s;
-    justify-content: space-between;
-    background-color: transparent;
-  }
-
-  .tooltip-arrow {
+  .arrow {
     display: block;
     position: absolute;
   }
