@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function DiscordImage({id, type, image, alt, width, height}: {
   id: string
   type: 'user avatar' | 'guild icon'
@@ -9,16 +11,16 @@ export default function DiscordImage({id, type, image, alt, width, height}: {
   const isAnimate = image.includes('a_')
 
   return (
-    <img src={`https://cdn.discordapp.com/${type == 'guild icon' ? 
+    <Image src={`https://cdn.discordapp.com/${type == 'guild icon' ? 
         'icons' :
         'avatars'
       }/${id}/${image}.${isAnimate ? 
         'gif' : 
-        'png'}`
+        'png'}?size=${width ?? 40}`
       } 
-      alt={(alt || '')+' '+type} 
-      width={width || 40} 
-      height={height || 40} 
+      alt={(alt ?? '')+' '+type} 
+      width={width ?? 40} 
+      height={height ?? 40} 
     />
   )
 }
