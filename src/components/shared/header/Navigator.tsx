@@ -4,19 +4,19 @@ import { type MouseEvent } from 'react'
 import Link from "next/link"
 import { useTooltips, useUser, useLanguage, useDialog } from '@/hooks'
 import { useRouter, usePathname } from 'next/navigation'
-import { customFetch, documentExist } from '@/utils/services'
-import type { TooltipOption } from '@/utils/types'
-import { PROTECTED_ROUTES } from '@/utils/config'
-// import { RxDashboard } from 'react-icons/rx'
-// import { BiUserCircle } from 'react-icons/bi'
-// import { IoMdExit, IoMdLogIn } from 'react-icons/io'
+import { documentExist } from '@/utils/services'
+import type { TooltipOption } from '@/types'
+import DashboardIcon from '@/icons/dashboard'
+import UserCircleIcon from '@/icons/userCircle'
+import ExitIcon from '@/icons/exit'
+import LoginIcon from '@/icons/login'
 import DiscordImage from '@/components/image/DiscordImage'
 
 export default function Navigator(){
   const pathName = usePathname()
   const router = useRouter()
   const { textLang } = useLanguage()
-  const { user, updateUser } = useUser()
+  const { user } = useUser()
   const { events, createTooltip } = useTooltips()
   const { openDialog } = useDialog()
 
@@ -33,34 +33,25 @@ export default function Navigator(){
 
   const options: TooltipOption[] = user ? [
     {
-      // icon: <RxDashboard />,
-      icon: '-',
+      icon: <DashboardIcon />,
       name: textLang.servers,
       function() {
-        
-      },
+        location.assign('/servers') 
+      }
     },
     {
-      // icon: <IoMdExit />,
-      icon: '-',
+      icon: <ExitIcon />,
       name: textLang.logOut,
       function() {
-        if(documentExist){          
-          customFetch('auth/logout').then(res=> {
-            if(res.ok) {
-              updateUser()
-              if(PROTECTED_ROUTES.some(s=> s == pathName)) router.push('/')
-            }
-          }).catch(e=> {
-            console.error(e)
-          })
+        if(documentExist){
+          document.cookie = "sessionId=; expires=Thu, 01 Jan 2000 00:00:00 UTC; path=/;"
+          location.assign('/')
         }
       },
     }
   ] : [
     {
-      // icon: <IoMdLogIn />,
-      icon: '-',
+      icon: <LoginIcon />,
       name: textLang.logIn,
       function() {
         openDialog()
@@ -75,7 +66,7 @@ export default function Navigator(){
   return (
     <nav>
       <ul className={styles.routes}>
-        {ROUTES.map((r, i)=> <li key={i} {...events} data-name={r.name} data-direction={'bottom'}>
+        {ROUTES.map((r, i)=> <li key={i}>
           <Link href={r.path} className={pathName == r.path ? 'current' : ''} >{r.name}</Link>
         </li>)}
       </ul>
@@ -83,8 +74,7 @@ export default function Navigator(){
       <div onClick={handleClick} className={styles.user} style={{border: user?.avatar ? '2px solid var(--border)' : ''}} data-direction='bottom'>
         {user?.avatar
           ? <DiscordImage id={user.id} image={user.avatar} type='user avatar' alt={user.username} />
-          : 'hola'
-          // <BiUserCircle className={styles['user-default']} />
+          : <UserCircleIcon className={styles['user-default']} />
         }
       </div>
     </nav>

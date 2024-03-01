@@ -1,15 +1,16 @@
 import styles from './header.module.css'
 
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import Navigator from "./Navigator";
+import Navigator from './Navigator'
 import { useRouter } from 'next/navigation'
-import { documentExist, windowExist } from '@/utils/services';
-import { useTooltips, useLanguage } from '@/hooks';
-// import { IoMdPersonAdd } from 'react-icons/io'
-// import { MdOutlinePrivacyTip, MdOutlineAutoStories } from 'react-icons/md'
-import { QUTOOL_INVITE_URL } from '@/utils/config';
+import { documentExist, windowExist } from '@/utils/services'
+import { useTooltips, useLanguage } from '@/hooks'
+import PersonAddIcon from '@/icons/personAdd'
+import OutlinePrivacyIcon from '@/icons/outlinePrivacy'
+import AutoStoriesIcon from '@/icons/autoStories'
+import { QUTOOL_INVITE_URL } from '@/utils/config'
 
 export default function Header(){
   const router = useRouter()
@@ -33,24 +34,21 @@ export default function Header(){
           options: [
             {
               name: textLang.invite,
-              // icon: <IoMdPersonAdd />,
-              icon: '-',
+              icon: <PersonAddIcon />,
               function() {
                 if(windowExist) window.open(QUTOOL_INVITE_URL, '_blank')
               }
             },
             {
               name: textLang.TOS,
-              // icon: <MdOutlineAutoStories />,
-              icon: '-',
+              icon: <AutoStoriesIcon />,
               function() {
                 router.push('/terms')
               },
             },
             {
               name: textLang.PP,
-              // icon: <MdOutlinePrivacyTip />,
-              icon: '-',
+              icon: <OutlinePrivacyIcon />,
               function() {
                 router.push('/privacy')
               },

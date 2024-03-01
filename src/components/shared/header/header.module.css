@@ -5,7 +5,7 @@
   padding: 14px 20px;
   display: flex;
   position: sticky;
-  transition: top 0.4s, padding 0.4s, background-color 0.4s, border-radius 0.8s;
+  transition: top 0.4s, padding 0.4s, background-color 0.4s, border-radius 0.4s, box-shadow 0.4s;
   justify-content: space-between;
 
   &.active {
@@ -13,6 +13,7 @@
     padding: 10px 20px;
     border-radius: 14px;
     background-color: var(--accent-bg);
+    box-shadow: var(--tooltip-shadow);
   }
 }
 
