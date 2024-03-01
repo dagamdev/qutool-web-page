@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import type { Tooltip } from '@/utils/types'
+import type { Tooltip } from '@/types'
 
 export interface TooltipsContextData {
   tooltips: Tooltip[]
