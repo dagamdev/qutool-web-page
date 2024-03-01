@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { TooltipsContext } from "../contexts"
-import type { Tooltip } from '@/utils/types'
+import type { Tooltip } from '@/types'
 
 export default function TooltipsProvider({ children }: { children: ReactNode }){
   const [tooltips, setTooltips] = useState<Tooltip[]>([])
