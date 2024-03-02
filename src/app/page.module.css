@@ -11,6 +11,7 @@
   margin: 20px;
 }
 
-.home p {
+.paragraph {
   white-space: pre-wrap;
+  text-wrap: balance;
 }
