@@ -1,5 +1,5 @@
-import { DISCORD_END_POINT } from "./config"
-import type { ElementDirection, Languages } from "../types"
+import { DISCORD_END_POINT } from './config'
+import type { ElementDirection, Languages } from '../types'
 
 export const documentExist = typeof document != 'undefined'
 export const windowExist = typeof window != 'undefined'
