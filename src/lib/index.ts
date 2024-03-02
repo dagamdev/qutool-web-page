@@ -5,7 +5,7 @@ import texts from '@/utils/texts.json'
 import type { Languages, User } from '@/types'
 import { getTextsLang } from './controllers'
 import { DISCORD_END_POINT } from '@/utils/config'
-export const  controllers = { getTextsLang } 
+export const controllers = { getTextsLang } 
 
 export async function getSession() {
   const cookieStore = cookies()
