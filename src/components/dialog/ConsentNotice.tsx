@@ -2,9 +2,8 @@
 
 import styles from './dialog.module.css'
 import Link from 'next/link'
-import { useRef, useState, useEffect, type MouseEvent, type AnimationEvent } from 'react'
+import { useState, useEffect, type AnimationEvent } from 'react'
 import { useDialog, useLanguage } from "@/hooks"
-import { transformText, windowExist } from "@/utils/services"
 
 const CONCENT_CONTENT = {
   en: (<>
@@ -16,32 +15,29 @@ const CONCENT_CONTENT = {
 }
 
 export default function ConsenNotice () {
-  const { closeDialog, showDialog } = useDialog()
+  const { showDialog, closeDialog: setCloseDialog } = useDialog()
   const { lang } = useLanguage()
   const { textLang } = useLanguage()
   const [thisRef, setThisref] = useState<HTMLDialogElement | null>(null)
 
   useEffect(() => {
     if (showDialog) thisRef?.showModal()
-    console.log(thisRef)
   }, [thisRef, showDialog])
 
-  const disagreement = () => {
-    thisRef?.close()
-    closeDialog()
+  const closeDialog = () => {
+    thisRef?.setAttribute('close', '')
   }
 
   const handleSignIn = () => {
-    location.assign(`https://discord.com/oauth2/authorize?client_id=935707268090056734&response_type=code&redirect_uri=${encodeURIComponent(location.origin + '/api/auth/callback')}&scope=identify+guilds+guilds.join`)
-    thisRef?.close()
     closeDialog()
+    location.assign(`https://discord.com/oauth2/authorize?client_id=935707268090056734&response_type=code&redirect_uri=${encodeURIComponent(location.origin + '/api/auth/callback')}&scope=identify+guilds+guilds.join`)
   }
 
   const handleAnimationEnd = ({target}: AnimationEvent<HTMLDialogElement>) => {
-    console.log('end animation', target)
-    if(target instanceof HTMLElement && target.classList.contains(styles.hide)) {
-      closeDialog()
-      thisRef?.close()
+    if(target instanceof HTMLDialogElement && target.hasAttribute('close')) {
+      target.close()
+      target.removeAttribute('close')
+      setCloseDialog()
     }
   }
   
@@ -50,7 +46,7 @@ export default function ConsenNotice () {
       <p>{CONCENT_CONTENT[lang]}</p>
 
       <div className={styles['dialog-buttons']}>
-        <button onClick={disagreement}>{textLang.inDisagreement}</button>
+        <button onClick={closeDialog}>{textLang.inDisagreement}</button>
         <button onClick={handleSignIn}>{textLang.ok}</button>  
       </div>
     </dialog>
