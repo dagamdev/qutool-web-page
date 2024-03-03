@@ -15,43 +15,44 @@ const CONCENT_CONTENT = {
   </>)
 }
 
-export default function ConsenNotice(){
+export default function ConsenNotice () {
+  const { closeDialog, showDialog } = useDialog()
   const { lang } = useLanguage()
-  const { closeDialog } = useDialog()
   const { textLang } = useLanguage()
-  const [close, setClose] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const [thisRef, setThisref] = useState<HTMLDialogElement | null>(null)
 
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-    if(event.target instanceof Node){
-      if(!cardRef.current?.contains(event.target)) setClose(true)
-    }
+  useEffect(() => {
+    if (showDialog) thisRef?.showModal()
+    console.log(thisRef)
+  }, [thisRef, showDialog])
+
+  const disagreement = () => {
+    thisRef?.close()
+    closeDialog()
   }
 
   const handleSignIn = () => {
     location.assign(`https://discord.com/oauth2/authorize?client_id=935707268090056734&response_type=code&redirect_uri=${encodeURIComponent(location.origin + '/api/auth/callback')}&scope=identify+guilds+guilds.join`)
-    setClose(true)
+    thisRef?.close()
+    closeDialog()
   }
 
-  const handleAnimationEnd = ({target}: AnimationEvent<HTMLDivElement>) => {
-    console.log(target)
-    if(close && target instanceof HTMLElement && target.classList.contains(styles.hide)) {
-      console.log('close')
+  const handleAnimationEnd = ({target}: AnimationEvent<HTMLDialogElement>) => {
+    console.log('end animation', target)
+    if(target instanceof HTMLElement && target.classList.contains(styles.hide)) {
       closeDialog()
+      thisRef?.close()
     }
   }
   
   return (
-    <div onClick={handleClick} className={`${styles.dialog} ${close ? styles.hide : ''}`} onAnimationEnd={handleAnimationEnd}>
-      <div ref={cardRef} className={styles['dialog-card']} >
-        {/* <p dangerouslySetInnerHTML={{__html: transformText(texts[lang])}} /> */}
-        <p>{CONCENT_CONTENT[lang]}</p>
+    <dialog ref={setThisref} className={styles.dialog} onAnimationEnd={handleAnimationEnd}>
+      <p>{CONCENT_CONTENT[lang]}</p>
 
-        <div className={styles['dialog-buttons']}>
-          <button onClick={closeDialog}>{textLang.inDisagreement}</button>
-          <button onClick={handleSignIn}>{textLang.ok}</button>  
-        </div>
+      <div className={styles['dialog-buttons']}>
+        <button onClick={disagreement}>{textLang.inDisagreement}</button>
+        <button onClick={handleSignIn}>{textLang.ok}</button>  
       </div>
-    </div>
+    </dialog>
   )
 }

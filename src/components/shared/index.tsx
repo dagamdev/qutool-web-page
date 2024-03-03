@@ -8,14 +8,14 @@ import ConsenNotice from "../dialog/ConsentNotice"
 
 export default function SharedComponents(){
   const { tooltips } = useTooltips()
-  const { showDialog } = useDialog()
+  const { loadDialog } = useDialog()
   
   return (
     <>
       <Header />
       <CursorTarget />
       {tooltips && tooltips.map(t=> <Tooltip key={t.id} tooltip={t} />)}
-      {showDialog && <ConsenNotice />}
+      {loadDialog && <ConsenNotice />}
     </>
   )
 }
