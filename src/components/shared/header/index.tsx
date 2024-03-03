@@ -35,23 +35,29 @@ export default function Header(){
             {
               name: textLang.invite,
               icon: <PersonAddIcon />,
-              function() {
-                if(windowExist) window.open(QUTOOL_INVITE_URL, '_blank')
+              events: {
+                onClick() {
+                  if(windowExist) window.open(QUTOOL_INVITE_URL, '_blank')
+                }  
               }
             },
             {
               name: textLang.TOS,
               icon: <AutoStoriesIcon />,
-              function() {
-                router.push('/terms')
-              },
+              events: {
+                onClick() {
+                  router.push('/terms')
+                }
+              }
             },
             {
               name: textLang.PP,
               icon: <OutlinePrivacyIcon />,
-              function() {
-                router.push('/privacy')
-              },
+              events: {
+                onClick() {
+                  router.push('/privacy')
+                }
+              }
             }
           ]
         })

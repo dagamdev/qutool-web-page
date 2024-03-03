@@ -14,11 +14,10 @@ import DiscordImage from '@/components/image/DiscordImage'
 
 export default function Navigator(){
   const pathName = usePathname()
-  const router = useRouter()
   const { textLang } = useLanguage()
   const { user } = useUser()
   const { events, createTooltip } = useTooltips()
-  const { openDialog } = useDialog()
+  const { setLoadDialog, openDialog } = useDialog()
 
   const ROUTES = [
     {
@@ -35,27 +34,41 @@ export default function Navigator(){
     {
       icon: <DashboardIcon />,
       name: textLang.servers,
-      function() {
-        location.assign('/servers') 
-      }
+      events: {
+        onClick() {
+          location.assign('/servers') 
+        }
+      },
+      closeAfterEvent: true
     },
     {
       icon: <ExitIcon />,
       name: textLang.logOut,
-      function() {
-        if(documentExist){
-          document.cookie = "sessionId=; expires=Thu, 01 Jan 2000 00:00:00 UTC; path=/;"
-          location.assign('/')
+      events: {
+        onClick() {
+          if(documentExist){
+            document.cookie = "sessionId=; expires=Thu, 01 Jan 2000 00:00:00 UTC; path=/;"
+            location.assign('/')
+          }
         }
       },
+      closeAfterEvent: true
     }
   ] : [
     {
       icon: <LoginIcon />,
       name: textLang.logIn,
-      function() {
-        openDialog()
+      events: {
+        onClick() {
+          openDialog()
+        },
+        onMouseEnter() {
+          setLoadDialog()
+        }
       },
+      closeAfterEvent: {
+        onClick: true
+      }
     }
   ]
 
