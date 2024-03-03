@@ -74,10 +74,20 @@ export default function Tooltip({tooltip}: {
     <div ref={setThisRef} className={`${styles.root} ${tooltip.options ? styles.options : ''} ${styles[tooltip.direction ?? 'top']} tlp`} >
       {tooltip.targetElement && <div className={styles.arrow} />}
       {tooltip.options ?
-        tooltip.options.map(o=> <li key={o.name} className={styles.option} onClick={()=> {
-          o.function()
-          closeTooltip()
-        }} >
+        tooltip.options.map(o => <li key={o.name} className={styles.option}
+          onClick={o.events.onClick ? (ev) => {
+            o.events.onClick?.(ev)
+            if (o.closeAfterEvent === true || typeof o.closeAfterEvent === 'object' && o.closeAfterEvent.onClick) {
+              closeTooltip()
+            }
+          } : undefined}
+          onMouseEnter={o.events.onMouseEnter ? (ev) => {
+            o.events.onMouseEnter?.(ev)
+            if (o.closeAfterEvent === true || typeof o.closeAfterEvent === 'object' && o.closeAfterEvent.onMouseEnter) {
+              closeTooltip()
+            }
+          } : undefined}
+        >
           {typeof o.icon == 'string' ? 
             <p>{o.icon}</p> :
             <div className={styles['tooltip-option-icon']}>{o.icon}</div>
