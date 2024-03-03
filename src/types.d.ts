@@ -1,3 +1,5 @@
+import { type DOMAttributes, type MouseEvent } from 'react'
+
 export interface Oauth2Data {
   token_type: string
   access_token: string
@@ -46,7 +48,14 @@ export type ElementDirection = 'top' | 'left' | 'bottom' | 'right'
 export interface TooltipOption {
   icon: string | JSX.Element
   name: string
-  function: ()=> void
+  events: {
+    onClick?: <HT>(ev: MouseEvent<HT>) => void
+    onMouseEnter?: <HT>(ev: MouseEvent<HT>) => void
+  }
+  closeAfterEvent?: {
+    onClick?: boolean
+    onMouseEnter?: boolean
+  } | boolean
 }
 
 export interface Tooltip {
