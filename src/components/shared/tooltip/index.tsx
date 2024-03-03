@@ -1,6 +1,6 @@
 import styles from './tooltip.module.css'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { useTooltips } from '@/hooks'
 import { documentExist, setFixedAbsolutePosition, setPositionByTarget, windowExist } from '@/utils/services'
 import { Tooltip } from '@/types'
@@ -15,7 +15,7 @@ export default function Tooltip({tooltip}: {
 
   const minWidth = windowExist ? window.innerWidth <= 500 : false
 
-  const closeTooltip = () => {
+  const closeTooltip = useCallback(() => {
     if(thisRef && thisRef.classList.contains(styles.show)) {
       thisRef.classList.remove(styles.show)
     }
@@ -30,7 +30,7 @@ export default function Tooltip({tooltip}: {
       deleteTooltip(tooltip.id)
       setDeleteId()
     }, 400)
-  }
+  }, [thisRef, deleteTooltip, setDeleteId, tooltip.id, tooltip.targetElement])
 
   useEffect(()=> {
     if(tooltip && thisRef){
@@ -45,13 +45,13 @@ export default function Tooltip({tooltip}: {
           setBackground(true)
           backgroundRef.current?.classList.add(styles.show)
         }
-        
       }
+      
       if(!minWidth) thisRef.classList.add(styles.show)
     }
 
     const handleGlobalClick = (event: MouseEvent) => {
-      if(thisRef && event.target && !thisRef.contains(event.target as Node)){
+      if(thisRef && event.target instanceof Node && !thisRef.contains(event.target)){
         closeTooltip()
       }
     }
@@ -64,17 +64,14 @@ export default function Tooltip({tooltip}: {
       }
     }
 
-  }, [thisRef, tooltip])
+  }, [thisRef, tooltip, closeTooltip, minWidth])
 
   useEffect(()=> {
-    // console.log({deleteId})
-    if(deleteId == tooltip.id) closeTooltip()
-    
-
-  }, [deleteId, thisRef])
+    if(deleteId === tooltip.id) closeTooltip()
+  }, [deleteId, thisRef, tooltip.id, closeTooltip])
 
   const tooltipElement = tooltip && (
-    <div ref={setThisRef} className={`${styles.root} ${tooltip.options ? styles.options : ''} ${styles[tooltip.direction || 'top']} tlp`} >
+    <div ref={setThisRef} className={`${styles.root} ${tooltip.options ? styles.options : ''} ${styles[tooltip.direction ?? 'top']} tlp`} >
       {tooltip.targetElement && <div className={styles.arrow} />}
       {tooltip.options ?
         tooltip.options.map(o=> <li key={o.name} className={styles.option} onClick={()=> {
