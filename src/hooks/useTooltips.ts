@@ -18,7 +18,7 @@ export function useTooltips() {
         const direction = (currentTarget.dataset.direction || 'top') as ElementDirection
   
         const newTooltip = tooltipsContext.createTooltip({
-          content: currentTarget.dataset.name || 'undefined',
+          content: currentTarget.dataset.name ?? 'undefined',
           direction,
           ...config,
           targetElement: currentTarget
