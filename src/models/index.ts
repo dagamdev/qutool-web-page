@@ -1,5 +1,5 @@
 import { Schema, model, models, SchemaTypes, Model } from 'mongoose'
-import { dbConnect } from '@/utils/db'
+import { dbConnect } from '@/lib/db'
 import type { Session } from '@/types'
 
 dbConnect()
