@@ -11,7 +11,7 @@ export default function GuildCard ({ guild }: { guild: Guild }){
   const [inGuild, setInGuild] = useState(false)
 
   useEffect(()=> {
-    customFetch(`bot/guilds/${guild.id}`).then(res=> {
+    customFetch(`bot/servers/${guild.id}`).then(res=> {
       if(res.id) setInGuild(true)
     }).catch(e=> console.error(e))
   }, [])
