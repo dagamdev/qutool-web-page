@@ -1,7 +1,12 @@
-import { Metadata } from "next"
+import { Metadata } from 'next'
+import { getSession } from '@/lib'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
-  title: 'Servers'
+  title: {
+    template: '%s | Servers',
+    default: 'Servers 🦾'
+  }
 }
 
 export default async function ServersLayout({
@@ -9,7 +14,8 @@ export default async function ServersLayout({
 }: {
   children: React.ReactNode
 }) {
-  console.log('Servers layout')
+  const session = await getSession()
+  if (session === null) redirect('/')
 
   return (
     <>
