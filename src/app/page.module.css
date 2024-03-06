@@ -7,11 +7,22 @@
 }
 
 .home h2 {
+  color: var(--text-light);
+  margin-bottom: 60px;
+  font-size: 40px;
+}
+  
+.botName {
   color: var(--accent);
-  margin: 20px;
+}
+
+.discord {
+  color: var(--discord);
 }
 
 .paragraph {
   white-space: pre-wrap;
-  text-wrap: balance;
+  text-wrap: pretty;
+  margin-bottom: 50px;
+  max-width: 600px;
 }
