@@ -12,10 +12,10 @@ export default async function Home() {
   return (
     <main className={styles.home}>
       <h2>{text.title.split(/ +/g).map(tx => tx === 'Qutool'
-        ? <span key={tx} className={styles.botName}>{tx}</span>
+        ? <span key={tx} className={styles.botName}>{tx + ' '}</span>
         : tx === 'Discord'
-          ? <span key={tx} className={styles.discord}>{tx}</span>
-          : ' ' + tx + ' '
+          ? <span key={tx} className={styles.discord}>{tx + ' '}</span>
+          : tx + ' '
       )}</h2>
       <p className={styles.paragraph} dangerouslySetInnerHTML={{__html: transformText(description)}}></p>
       <LogInOrDashboard />
